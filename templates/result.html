@@ -19,6 +19,7 @@
             <tr>
                 <th>Vulnerability Type</th>
                 <th>Status</th>
+                <th>Max Score</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +27,7 @@
             <tr>
                 <td>{{ ml.vulnerability }}</td>
                 <td>{{ ml.status }}</td>
+                <td>{{ "%.3f"|format(ml.score) if ml.score is not none else "-" }}</td>
             </tr>
             {% endfor %}
         </tbody>
