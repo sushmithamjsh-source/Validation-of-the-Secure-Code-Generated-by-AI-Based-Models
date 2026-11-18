@@ -10,8 +10,7 @@ Paste a code snippet, and the app reports:
 - Bandit's rule-based findings with their severity
 - an overall verdict that combines both
 
-<!-- Add a screenshot of the results page here, e.g.:
-![Results page](docs/screenshot.png) -->
+![Results page for a snippet containing SQL and command injection](docs/screenshot.png)
 
 ## How it works
 
@@ -50,7 +49,7 @@ code ──► strip comments ──► tokenize ──► Word2Vec (300-d) ─�
 
 ## Getting started
 
-Requires Python 3.10 or 3.11.
+Requires Python 3.9–3.11 (TensorFlow 2.15).
 
 ```bash
 git clone <this-repo-url>

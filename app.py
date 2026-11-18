@@ -39,6 +39,9 @@ def index():
         code_text = request.form.get("code")
         if not code_text or code_text.strip() == "":
             return "No code provided."
+        # Browsers submit textarea content with CRLF line endings; normalize so
+        # Bandit's line numbers match what the user pasted.
+        code_text = code_text.replace("\r\n", "\n").replace("\r", "\n")
 
         chunks = preprocess_code_sliding_window(code_text, maxlen=200, stride=100)
 
@@ -54,7 +57,7 @@ def index():
         # Unique temp file per request so concurrent users don't overwrite each other
         fd, filepath = tempfile.mkstemp(suffix=".py")
         try:
-            with os.fdopen(fd, "w", encoding="utf-8") as f:
+            with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as f:
                 f.write(code_text)
             non_ml_result = run_bandit(filepath)
         finally:
