@@ -15,3 +15,4 @@ env/
 # Local scratch / generated
 temp_code.py
 demo_*.png
+training/output/

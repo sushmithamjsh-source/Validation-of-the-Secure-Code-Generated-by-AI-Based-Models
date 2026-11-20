@@ -1,0 +1,49 @@
+{
+  "mode": "command_injection",
+  "seed": 42,
+  "max_len": 100,
+  "split": "by repository",
+  "repositories": 21,
+  "repositories_per_split": {
+    "train": 14,
+    "validation": 1,
+    "test": 6
+  },
+  "token_length": {
+    "median": 41.0,
+    "p90": 58.0
+  },
+  "train": {
+    "accuracy": 0.9887,
+    "precision": 0.8818,
+    "recall": 0.9938,
+    "f1": 0.9345,
+    "tp": 806,
+    "fp": 108,
+    "fn": 5,
+    "tn": 9081,
+    "n": 10000
+  },
+  "validation": {
+    "accuracy": 0.9912,
+    "precision": 0.8795,
+    "recall": 0.9865,
+    "f1": 0.9299,
+    "tp": 146,
+    "fp": 20,
+    "fn": 2,
+    "tn": 2332,
+    "n": 2500
+  },
+  "test": {
+    "accuracy": 0.8348,
+    "precision": 0.664,
+    "recall": 0.3354,
+    "f1": 0.4456,
+    "tp": 166,
+    "fp": 84,
+    "fn": 329,
+    "tn": 1921,
+    "n": 2500
+  }
+}

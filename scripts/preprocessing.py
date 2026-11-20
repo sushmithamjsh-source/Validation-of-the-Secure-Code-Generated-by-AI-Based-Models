@@ -24,26 +24,30 @@ def tokenize_code(code):
     return [t for t in tokens if t.strip()]
 
 
-def preprocess_code_sliding_window(code, maxlen=200, stride=100):
+def preprocess_code_sliding_window(code, window=50, stride=25, maxlen=100):
     """
     Turn source code into a list of (maxlen, embedding_dim) arrays.
-    Like training, out-of-vocabulary tokens are skipped and short
-    sequences are zero-padded at the front ('pre' padding).
+
+    Mirrors training (training/train.py): each sample there is ~200 characters of code
+    (median ~50 tokens) zero-padded at the front to `maxlen` tokens, with
+    out-of-vocabulary tokens skipped. So the code is cut into overlapping windows
+    of `window` tokens, each front-padded to `maxlen`.
     """
     vectors = [w2v_model.wv[t] for t in tokenize_code(code) if t in w2v_model.wv]
     if not vectors:
         return []
     vectors = np.asarray(vectors, dtype=np.float32)
     n = len(vectors)
+    window = min(window, maxlen)
 
-    starts = list(range(0, max(n - maxlen, 0) + 1, stride))
-    if starts[-1] + maxlen < n:  # make sure the tail of the code is covered
-        starts.append(n - maxlen)
+    starts = list(range(0, max(n - window, 0) + 1, stride))
+    if starts[-1] + window < n:  # make sure the tail of the code is covered
+        starts.append(n - window)
 
     chunks = []
     for start in starts:
-        window = vectors[start:start + maxlen]
+        window_vecs = vectors[start:start + window]
         chunk = np.zeros((maxlen, embedding_dim), dtype=np.float32)
-        chunk[maxlen - len(window):] = window
+        chunk[maxlen - len(window_vecs):] = window_vecs
         chunks.append(chunk)
     return chunks

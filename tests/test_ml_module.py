@@ -10,12 +10,12 @@ class FakeModel:
         self.scores = scores
 
     def predict(self, batch, verbose=0):
-        assert batch.shape == (len(self.scores), 200, 300)
+        assert batch.shape == (len(self.scores), 100, 300)
         return np.array(self.scores, dtype=np.float32).reshape(-1, 1)
 
 
 def chunks(n):
-    return [np.zeros((200, 300), dtype=np.float32) for _ in range(n)]
+    return [np.zeros((100, 300), dtype=np.float32) for _ in range(n)]
 
 
 def test_any_chunk_above_threshold_is_vulnerable():

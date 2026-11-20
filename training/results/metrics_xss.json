@@ -1,0 +1,49 @@
+{
+  "mode": "xss",
+  "seed": 42,
+  "max_len": 100,
+  "split": "by repository",
+  "repositories": 8,
+  "repositories_per_split": {
+    "train": 2,
+    "validation": 1,
+    "test": 5
+  },
+  "token_length": {
+    "median": 49.0,
+    "p90": 76.0
+  },
+  "train": {
+    "accuracy": 0.9974,
+    "precision": 0.9664,
+    "recall": 0.9899,
+    "f1": 0.978,
+    "tp": 489,
+    "fp": 17,
+    "fn": 5,
+    "tn": 7966,
+    "n": 8477
+  },
+  "validation": {
+    "accuracy": 0.9996,
+    "precision": 0.995,
+    "recall": 1.0,
+    "f1": 0.9975,
+    "tp": 198,
+    "fp": 1,
+    "fn": 0,
+    "tn": 2301,
+    "n": 2500
+  },
+  "test": {
+    "accuracy": 0.804,
+    "precision": 0.7692,
+    "recall": 0.0201,
+    "f1": 0.0392,
+    "tp": 10,
+    "fp": 3,
+    "fn": 487,
+    "tn": 2000,
+    "n": 2500
+  }
+}

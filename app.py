@@ -32,6 +32,9 @@ models = {
     "remote_code_execution": _load("LSTM_model_remote_code_execution.h5"),
 }
 
+# Token length the models were trained on (all models share it)
+MODEL_INPUT_LEN = next(iter(models.values())).input_shape[1] or 100
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -43,7 +46,7 @@ def index():
         # Bandit's line numbers match what the user pasted.
         code_text = code_text.replace("\r\n", "\n").replace("\r", "\n")
 
-        chunks = preprocess_code_sliding_window(code_text, maxlen=200, stride=100)
+        chunks = preprocess_code_sliding_window(code_text, maxlen=MODEL_INPUT_LEN)
 
         ml_results = {}
         for vuln_type, model in models.items():
